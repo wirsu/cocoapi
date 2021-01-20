@@ -453,8 +453,27 @@ class COCOeval:
                 mean_s = -1
             else:
                 mean_s = np.mean(s[s>-1])
+                
+            #cacluate AP(average precision) for each category
+            print("Custom Metrics")
+            num_classes = 1
+            avg_ap = 0.0
+            avg_ar = 0.0
+            if ap == 1:
+                for i in range(0, num_classes):
+                    print('Category : {0} : {1}'.format(i,np.mean(s[:,:,i,:])))
+                    avg_ap +=np.mean(s[:,:,i,:])
+                print('(All Categories) mAP : {}'.format(avg_ap / num_classes)) 
+            else:
+                for i in range(0, num_classes):
+                    print('Category : {0} : {1}'.format(i,np.mean(s[:,:,i,:])))
+                    avg_ar +=np.mean(s[:,:,i,:])
+                print('(All Categories) mAR : {}'.format(avg_ar / num_classes)) 
+                
             print(iStr.format(titleStr, typeStr, iouStr, areaRng, maxDets, mean_s))
-            return mean_s
+            return mean_s    
+                
+
         def _summarizeDets():
             stats = np.zeros((12,))
             stats[0] = _summarize(1)
