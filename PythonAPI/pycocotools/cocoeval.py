@@ -419,7 +419,7 @@ class COCOeval:
         toc = time.time()
         print('DONE (t={:0.2f}s).'.format( toc-tic))
 
-    def summarize(self):
+    def summarize(self, num_classes):
         '''
         Compute and display summary metrics for evaluation results.
         Note this functin can *only* be applied on the default parameter setting
@@ -456,7 +456,7 @@ class COCOeval:
                 
             #cacluate AP(average precision) for each category
             print("Custom Metrics")
-            num_classes = 1
+
             avg_ap = 0.0
             avg_ar = 0.0
             if ap == 1:
